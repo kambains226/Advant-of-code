@@ -2,21 +2,16 @@ import java.io.*;
 import java.util.*;
 public class Nice {  
     public static void main(String[] args) {
-        try (BufferedReader br = new BufferedReader(new FileReader("words.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("test.txt"))) {
             int nice = 0;
             String word;
             
             while ((word = br.readLine()) != null) { 
                 // Ensure word is not null before processing it
-                // if ( doubleLetter(word) && between(word) ) {
-                //     nice++;
-                //     System.out.println(word);
-                    
-                // }
-                // if (between(word) ) {
-                //     nice++;
-                // }
-                doubleCombo(word);
+                
+                if(doubleCombo(word)&& between(word) ) {
+                    nice++;
+                }
             }
             System.out.println("Nice words: " + nice); 
         } catch (IOException e) {
@@ -73,9 +68,16 @@ public class Nice {
         String combo = word.substring(i, i + 2);
         // if (track.contains(combo)) {
         //     return true;
-        // }
+        System.out.println(combo + " " + "test");
+         if(track.contains(combo)&& same(word) ) {
+            System.out.println(combo + " " + "test2");
+            // System.out.println(word);
+            return true;
+            // System.out.println(word); 
+
+        }
         track.add(combo);
-        if()
+        
     }
     System.out.println(word);
     System.out.println(track.toString());
@@ -86,11 +88,23 @@ public class Nice {
 
     return false;
 } 
+private static boolean same(String word){
+    for (int i = 0; i < word.length() -3 ; i++) {
+        if (word.charAt(i) == word.charAt(i + 1)&& word.charAt(i + 2) == word.charAt(i) &&word.charAt(i+3)==word.charAt(i+2)) {
+            // System.out.println(word + " " + word.charAt(i) + " " + word.charAt(i + 1) + " " + word.charAt(i + 2));
+           return true;  
+
+        }
+
+    }
+
+    return false;
+}
     private static boolean   between(String word){
 
         for (int i = 0; i < word.length() - 2; i++) {
             if (word.charAt(i) == word.charAt(i + 2)) {
-                System.out.println(word + " " + word.charAt(i) + " " + word.charAt(i + 1) + " " + word.charAt(i + 2));
+                // System.out.println(word + " " + word.charAt(i) + " " + word.charAt(i + 1) + " " + word.charAt(i + 2));
 
 
                 return true; // Found the xyx pattern
